@@ -6,6 +6,7 @@ import path from "path";
 import { userUpvoteRoutes } from "../modules/user_vote/user_vote.route";
 import { ratingRoutes } from "../modules/rating/rating.route";
 import { commentsRoutes } from "../modules/comments/comments.route";
+import { subscriptionRoutes } from "../modules/subscription/subscription.route";
 
 const router = Router();
 
@@ -34,6 +35,10 @@ const modulesRoutes = [
   {
     path: "/rating",
     route: ratingRoutes,
+  },
+  {
+    path: "/subscription",
+    route: subscriptionRoutes,
   },
 ];
 

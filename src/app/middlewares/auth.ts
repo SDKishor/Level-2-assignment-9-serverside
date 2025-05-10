@@ -6,14 +6,6 @@ import catchAsync from "../utils/catchAsync";
 import { NextFunction, Request, Response } from "express";
 import { Role } from "../../generated/prisma";
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: JwtPayload;
-    }
-  }
-}
-
 const auth = (role: Role) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;

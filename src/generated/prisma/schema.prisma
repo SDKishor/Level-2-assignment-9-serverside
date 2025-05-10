@@ -35,10 +35,11 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  Post     Post[]
-  Comment  Comment[]
-  Rating   Rating[]
-  UserVote UserVote[]
+  Subscription Subscription?
+  Post         Post[]
+  Comment      Comment[]
+  Rating       Rating[]
+  UserVote     UserVote[]
 
   @@map("users")
 }
@@ -121,4 +122,18 @@ model Catagory {
   Post Post[]
 
   @@map("categories")
+}
+
+model Subscription {
+  id                String   @id @default(uuid())
+  userId            String   @unique
+  sp_order_id       String   @unique
+  customer_order_id String
+  transactionStatus String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("subscriptions")
 }
