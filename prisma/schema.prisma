@@ -35,8 +35,10 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Post Post[]
-  CommentAndRating CommentAndRating[]
+  Post      Post[]
+  Comment   Comment[]
+  Rating    Rating[]
+  UserVote UserVote[]
 
   @@map("users")
 }
@@ -49,6 +51,7 @@ model Post {
   location  String
   price     Float
   image     String
+  ratingAvg  Int     @default(5)
   upvotes    Int      @default(0)
   downvotes  Int      @default(0)
   isPremiumPost Boolean  @default(false)
@@ -56,19 +59,49 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  CommentAndRating CommentAndRating[]
   Catagory Catagory[]
+  Comment Comment[]
+  Rating Rating[]
+  UserVote UserVote[]
 
   author    User     @relation(fields: [authorId], references: [id])
 
   @@map("posts")
 }
 
-model CommentAndRating {
+model Rating {
+  id        String   @id @default(uuid())
+  postId    String
+  userId    String   @unique
+  rating    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("ratings")
+}
+
+model UserVote {
+  id        String   @id @default(uuid())
+  postId    String   
+  userId    String   
+  upVote    Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  post      Post     @relation(fields: [postId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@map("user_votes")
+  @@unique([postId, userId], name: "unique_post_user_vote")
+}
+
+model Comment {
   id        String   @id @default(uuid())
   postId    String
   userId    String
-  rating    Int
   comment   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -76,7 +109,7 @@ model CommentAndRating {
   post      Post     @relation(fields: [postId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
 
-  @@map("comments_and_ratings")
+  @@map("comments")
 }
 
 model Catagory {

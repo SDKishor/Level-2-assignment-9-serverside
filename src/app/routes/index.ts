@@ -1,8 +1,11 @@
 import { Router } from "express";
 import { AuthRoutes } from "../modules/auth/auth.route";
 import { PostRoutes } from "../modules/post/post.route";
-import path from "path";
 import { CategoryRoutes } from "../modules/category/category.route";
+import path from "path";
+import { userUpvoteRoutes } from "../modules/user_vote/user_vote.route";
+import { ratingRoutes } from "../modules/rating/rating.route";
+import { commentsRoutes } from "../modules/comments/comments.route";
 
 const router = Router();
 
@@ -18,6 +21,19 @@ const modulesRoutes = [
   {
     path: "/categories",
     route: CategoryRoutes,
+  },
+  {
+    path: "/comments",
+    route: commentsRoutes,
+  },
+
+  {
+    path: "/user_vote",
+    route: userUpvoteRoutes,
+  },
+  {
+    path: "/rating",
+    route: ratingRoutes,
   },
 ];
 

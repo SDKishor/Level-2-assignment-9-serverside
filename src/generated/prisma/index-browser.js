@@ -139,6 +139,7 @@ exports.Prisma.PostScalarFieldEnum = {
   location: 'location',
   price: 'price',
   image: 'image',
+  ratingAvg: 'ratingAvg',
   upvotes: 'upvotes',
   downvotes: 'downvotes',
   isPremiumPost: 'isPremiumPost',
@@ -147,11 +148,28 @@ exports.Prisma.PostScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.CommentAndRatingScalarFieldEnum = {
+exports.Prisma.RatingScalarFieldEnum = {
   id: 'id',
   postId: 'postId',
   userId: 'userId',
   rating: 'rating',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserVoteScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
+  upVote: 'upVote',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId',
   comment: 'comment',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -187,7 +205,9 @@ exports.PostStatus = exports.$Enums.PostStatus = {
 exports.Prisma.ModelName = {
   User: 'User',
   Post: 'Post',
-  CommentAndRating: 'CommentAndRating',
+  Rating: 'Rating',
+  UserVote: 'UserVote',
+  Comment: 'Comment',
   Catagory: 'Catagory'
 };
 
